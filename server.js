@@ -25,11 +25,17 @@ app.post("/api/friends", function (req, res) {
     var resultArr = [];
 
     for (var i=0;i<friends.length;i++) {
-        var difference = Math.abs(friends[i].scores[0] - newFriend.scores[0]);
-        resultArr.push(difference);
+        var totalDifference = 0;
+        for (var s=0;s<friends[i].scores.length;s++) {
+            var difference = Math.abs(friends[i].scores[s] - newFriend.scores[s]);
+            totalDifference += difference;
+
+        };
+        
+        resultArr.push(totalDifference);
     };
 
-    console.log(resultArr);
+    console.log("result Array: " + resultArr);
 
     var bestMatchIndex = 0;
     var bestMatchValue = resultArr[0];
@@ -37,11 +43,9 @@ app.post("/api/friends", function (req, res) {
         if (resultArr[i]<bestMatchValue) {
             bestMatchValue = resultArr[i];
             bestMatchIndex = i;
-            console.log("best match " + bestMatchValue + " at index " + bestMatchIndex);
         }
     };
 
-    console.log("best: " + friends[bestMatchIndex]);
     // friends.push(newFriend);
 
     res.json(friends[bestMatchIndex]);
