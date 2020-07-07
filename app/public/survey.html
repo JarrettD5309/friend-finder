@@ -1,11 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Survey</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
+
 <body>
-    <h1>Survey</h1>
+    <div class="container">
+        <h1>Survey</h1>
+        <hr>
+        <form>
+            <div class="form-group">
+                <label for="inputName">Name</label>
+                <input type="text" class="form-control" id="inputName" placeholder="Enter name">
+                <small class="form-text text-muted">Required</small>
+            </div>
+            <div class="form-group">
+                <label for="inputPhoto">Link to Photo</label>
+                <input type="text" class="form-control" id="inputPhoto">
+                <small class="form-text text-muted">Required</small>
+            </div>
+            <div class="form-group">
+                <h3>Question 1</h3>
+                <p class="mb-2">This is a question</p>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="questionOne" id="qOneRadioOne" value="1">
+                    <label class="form-check-label" for="qOneRadioOne">1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="questionOne" id="qOneRadioTwo" value="2">
+                    <label class="form-check-label" for="qOneRadioTwo">2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="questionOne" id="qOneRadioThree" value="3">
+                    <label class="form-check-label" for="qOneRadioThree">3</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="questionOne" id="qOneRadioFour" value="4">
+                    <label class="form-check-label" for="qOneRadioFour">4</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="questionOne" id="qOneRadioFive" value="3">
+                    <label class="form-check-label" for="qOneRadioFive">5</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>Question 2</h3>
+                <p class="mb-2">This is a question</p>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="questionTwo" id="qTwoRadioOne" value="1">
+                    <label class="form-check-label" for="qTwoRadioOne">1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="questionTwo" id="qTwoRadioTwo" value="2">
+                    <label class="form-check-label" for="qTwoRadioTwo">2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="questionTwo" id="qTwoRadioThree" value="3">
+                    <label class="form-check-label" for="qTwoRadioThree">3</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="questionTwo" id="qTwoRadioFour" value="4">
+                    <label class="form-check-label" for="qTwoRadioFour">4</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="questionTwo" id="qTwoRadioFive" value="3">
+                    <label class="form-check-label" for="qTwoRadioFive">5</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        $("#submit-btn").on("click", function (event) {
+            event.preventDefault();
+            var newFriend = {
+                friendName: $("#inputName").val(),
+                photo: $("#inputPhoto").val(),
+                qOne: $('input[name="questionOne"]:checked').val(),
+                qTwo: $('input[name="questionTwo"]:checked').val()
+            };
+
+            console.log(newFriend);
+
+            // Question: What does this code do??
+            //   $.post("/api/characters", newCharacter)
+            //     .then(function(data) {
+            //       console.log("add.html", data);
+            //       alert("Adding character...");
+            //     });
+        });
+    </script>
 </body>
+
 </html>
