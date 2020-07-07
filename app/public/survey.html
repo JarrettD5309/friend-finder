@@ -26,7 +26,7 @@
                 <input type="text" class="form-control" id="inputPhoto">
                 <small class="form-text text-muted">Required</small>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <h3>Question 1</h3>
                 <p class="mb-2">This is a question</p>
                 <div class="form-check form-check-inline">
@@ -74,7 +74,9 @@
                     <input class="form-check-input" type="radio" name="questionTwo" id="qTwoRadioFive" value="3">
                     <label class="form-check-label" for="qTwoRadioFive">5</label>
                 </div>
-            </div>
+            </div> -->
+
+            <div id="question-div"></div>
 
             <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
         </form>
@@ -86,8 +88,16 @@
             var newFriend = {
                 friendName: $("#inputName").val(),
                 photo: $("#inputPhoto").val(),
-                qOne: $('input[name="questionOne"]:checked').val(),
-                qTwo: $('input[name="questionTwo"]:checked').val()
+                qOne: $('input[name="question1"]:checked').val(),
+                qTwo: $('input[name="question2"]:checked').val(),
+                qThree: $('input[name="question3"]:checked').val(),
+                qFour: $('input[name="question4"]:checked').val(),
+                qFive: $('input[name="question5"]:checked').val(),
+                qSix: $('input[name="question6"]:checked').val(),
+                qSeven: $('input[name="question7"]:checked').val(),
+                qEight: $('input[name="question8"]:checked').val(),
+                qNine: $('input[name="question9"]:checked').val(),
+                qTen: $('input[name="question10"]:checked').val()
             };
 
             console.log(newFriend);
@@ -99,6 +109,29 @@
             //       alert("Adding character...");
             //     });
         });
+
+        var questionArr = ["This is question 1", "This is question 2", "This is question 3", "This is question 4", "This is question 5", "This is question 6", "This is question 7", "This is question 8", "This is question 9", "This is question 10"];
+
+        for (var i = 0; i < questionArr.length; i++) {
+            var groupDiv = $("<div>").addClass("form-group");
+            var newH3 = $("<h3>").text("Question " + (i+1));
+            groupDiv.append(newH3);
+
+            var newPara = $("<p>").addClass("mb-2").text(questionArr[i]);
+            groupDiv.append(newPara);
+
+            for (var u=0;u<5;u++) {
+                var checkDiv = $("<div>").addClass("form-check form-check-inline");
+                var newInput = $("<input>").addClass("form-check-input").attr("type", "radio").attr("name","question" + (i+1)).attr("id","q" + (i+1) + "Radio" + (u+1)).attr("value", u+1);
+                var newLabel = $("<label>").addClass("form-check-label").attr("for","q" + (i+1) + "Radio" + (u+1)).text(u+1);
+                checkDiv.append(newInput);
+                checkDiv.append(newLabel);
+                groupDiv.append(checkDiv);
+            }
+
+            $("#question-div").append(groupDiv);
+        }
+
     </script>
 </body>
 
