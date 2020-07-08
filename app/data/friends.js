@@ -17,7 +17,7 @@ var friends = [
     },
     {
         name:"Dwight Schrute",
-        photo: "https://cdn.pastemagazine.com/www/articles/2020/05/20/the-office-dwight-schrute-main.jpg",
+        photo: "https://vignette.wikia.nocookie.net/theoffice/images/c/c5/Dwight_.jpg/revision/latest?cb=20170701082424",
         scores:[
             4,
             1,

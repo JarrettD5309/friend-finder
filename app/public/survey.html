@@ -10,10 +10,14 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <style>
-        /* #modalImg {
-            max-width: 300px;
-            max-height: 300px;
-        } */
+        @media screen and (max-width:400px) {}
+
+        @media screen and (min-width:401px) {
+            #modalImg {
+                max-width: 300px;
+                max-height: 300px;
+            }
+        }
     </style>
 </head>
 
@@ -44,13 +48,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" >Best Match</h4>
+                    <h4 class="modal-title">Best Match</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" id="modalBody">
-                    <h5 id="modalName"></h5>
+                    
                 </div>
             </div>
         </div>
@@ -71,8 +75,10 @@
             $.post("/api/friends", newFriend)
                 .then(function (data) {
                     console.log(data);
-                    $("#modalName").text(data.name);
-                    $("#modalBody").append("<img id='modalImg' class='img-fluid' src='"+data.photo+"'>");
+                    $("#modalBody").empty();
+                    $("#modalBody").append("<h5 id='modalName'>"+data.name+"</h5>");
+                    
+                    $("#modalBody").append("<img id='modalImg' class='img-fluid' src='" + data.photo + "'>");
                     $("#friendModal").modal("show");
 
                 });
