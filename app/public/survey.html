@@ -9,13 +9,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <style>
+        /* #modalImg {
+            max-width: 300px;
+            max-height: 300px;
+        } */
+    </style>
 </head>
 
 <body>
     <div class="container">
         <h1>Survey</h1>
         <hr>
-        <form>
+        <form class="mb-3">
             <div class="form-group">
                 <label for="inputName">Name</label>
                 <input type="text" class="form-control" id="inputName" placeholder="Enter name">
@@ -26,60 +32,28 @@
                 <input type="text" class="form-control" id="inputPhoto">
                 <small class="form-text text-muted">Required</small>
             </div>
-            <!-- <div class="form-group">
-                <h3>Question 1</h3>
-                <p class="mb-2">This is a question</p>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="questionOne" id="qOneRadioOne" value="1">
-                    <label class="form-check-label" for="qOneRadioOne">1</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="questionOne" id="qOneRadioTwo" value="2">
-                    <label class="form-check-label" for="qOneRadioTwo">2</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="questionOne" id="qOneRadioThree" value="3">
-                    <label class="form-check-label" for="qOneRadioThree">3</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="questionOne" id="qOneRadioFour" value="4">
-                    <label class="form-check-label" for="qOneRadioFour">4</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="questionOne" id="qOneRadioFive" value="3">
-                    <label class="form-check-label" for="qOneRadioFive">5</label>
-                </div>
-            </div>
 
-            <div class="form-group">
-                <h3>Question 2</h3>
-                <p class="mb-2">This is a question</p>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="questionTwo" id="qTwoRadioOne" value="1">
-                    <label class="form-check-label" for="qTwoRadioOne">1</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="questionTwo" id="qTwoRadioTwo" value="2">
-                    <label class="form-check-label" for="qTwoRadioTwo">2</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="questionTwo" id="qTwoRadioThree" value="3">
-                    <label class="form-check-label" for="qTwoRadioThree">3</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="questionTwo" id="qTwoRadioFour" value="4">
-                    <label class="form-check-label" for="qTwoRadioFour">4</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="questionTwo" id="qTwoRadioFive" value="3">
-                    <label class="form-check-label" for="qTwoRadioFive">5</label>
-                </div>
-            </div> -->
 
             <div id="question-div"></div>
 
             <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
         </form>
+    </div>
+
+    <div class="modal" id="friendModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" >Best Match</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <h5 id="modalName"></h5>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -88,42 +62,36 @@
             var newFriend = {
                 friendName: $("#inputName").val(),
                 photo: $("#inputPhoto").val(),
-                qOne: $('input[name="question1"]:checked').val(),
-                qTwo: $('input[name="question2"]:checked').val(),
-                qThree: $('input[name="question3"]:checked').val(),
-                qFour: $('input[name="question4"]:checked').val(),
-                qFive: $('input[name="question5"]:checked').val(),
-                qSix: $('input[name="question6"]:checked').val(),
-                qSeven: $('input[name="question7"]:checked').val(),
-                qEight: $('input[name="question8"]:checked').val(),
-                qNine: $('input[name="question9"]:checked').val(),
-                qTen: $('input[name="question10"]:checked').val()
+                scores: [parseInt($('input[name="question1"]:checked').val()), parseInt($('input[name="question2"]:checked').val()), parseInt($('input[name="question3"]:checked').val()), parseInt($('input[name="question4"]:checked').val()), parseInt($('input[name="question5"]:checked').val()), parseInt($('input[name="question6"]:checked').val()), parseInt($('input[name="question7"]:checked').val()), parseInt($('input[name="question8"]:checked').val()), parseInt($('input[name="question9"]:checked').val()), parseInt($('input[name="question10"]:checked').val())]
             };
 
             console.log(newFriend);
 
-            // Question: What does this code do??
-            //   $.post("/api/characters", newCharacter)
-            //     .then(function(data) {
-            //       console.log("add.html", data);
-            //       alert("Adding character...");
-            //     });
+
+            $.post("/api/friends", newFriend)
+                .then(function (data) {
+                    console.log(data);
+                    $("#modalName").text(data.name);
+                    $("#modalBody").append("<img id='modalImg' class='img-fluid' src='"+data.photo+"'>");
+                    $("#friendModal").modal("show");
+
+                });
         });
 
-        var questionArr = ["This is question 1", "This is question 2", "This is question 3", "This is question 4", "This is question 5", "This is question 6", "This is question 7", "This is question 8", "This is question 9", "This is question 10"];
+        var questionArr = ["The boss is the most important member of the team. (1 - Strongly Disagree, 5 - Strongly Agree)", "How much work you get done isn't nearly as important as how much fun you have. (1 - Strongly Disagree, 5 - Strongly Agree)", "Human Resources is the most important piece of the team. (1 - Strongly Disagree, 5 - Strongly Agree)", "Cats are the better than humans. (1 - Strongly Disagree, 5 - Strongly Agree)", "Pranks are out of place in the work environment. (1 - Strongly Disagree, 5 - Strongly Agree)", "Beets are the most nutritious vegetable. (1 - Strongly Disagree, 5 - Strongly Agree)", "Scranton, PA ia a wonderful town. (1 - Strongly Disagree, 5 - Strongly Agree)", "A salesperson is a modern day warrior. (1 - Strongly Disagree, 5 - Strongly Agree)", "Parties are important for office morale. (1 - Strongly Disagree, 5 - Strongly Agree)", "Assistant Regional Manager and Assistant to the Regional Manager are the same thing. (1 - Strongly Disagree, 5 - Strongly Agree)"];
 
         for (var i = 0; i < questionArr.length; i++) {
             var groupDiv = $("<div>").addClass("form-group");
-            var newH3 = $("<h3>").text("Question " + (i+1));
+            var newH3 = $("<h3>").text("Question " + (i + 1)).addClass("mt-4");
             groupDiv.append(newH3);
 
             var newPara = $("<p>").addClass("mb-2").text(questionArr[i]);
             groupDiv.append(newPara);
 
-            for (var u=0;u<5;u++) {
+            for (var u = 0; u < 5; u++) {
                 var checkDiv = $("<div>").addClass("form-check form-check-inline");
-                var newInput = $("<input>").addClass("form-check-input").attr("type", "radio").attr("name","question" + (i+1)).attr("id","q" + (i+1) + "Radio" + (u+1)).attr("value", u+1);
-                var newLabel = $("<label>").addClass("form-check-label").attr("for","q" + (i+1) + "Radio" + (u+1)).text(u+1);
+                var newInput = $("<input>").addClass("form-check-input").attr("type", "radio").attr("name", "question" + (i + 1)).attr("id", "q" + (i + 1) + "Radio" + (u + 1)).attr("value", u + 1);
+                var newLabel = $("<label>").addClass("form-check-label").attr("for", "q" + (i + 1) + "Radio" + (u + 1)).text(u + 1);
                 checkDiv.append(newInput);
                 checkDiv.append(newLabel);
                 groupDiv.append(checkDiv);
