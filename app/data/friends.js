@@ -1,6 +1,6 @@
 var friends = [
     {
-        name:"Michael Scott",
+        friendName:"Michael Scott",
         photo: "https://vignette.wikia.nocookie.net/theoffice/images/b/be/Character_-_MichaelScott.PNG/revision/latest/top-crop/width/360/height/360?cb=20200413224550",
         scores:[
             5,
@@ -16,7 +16,7 @@ var friends = [
         ]
     },
     {
-        name:"Dwight Schrute",
+        friendName:"Dwight Schrute",
         photo: "https://vignette.wikia.nocookie.net/theoffice/images/c/c5/Dwight_.jpg/revision/latest?cb=20170701082424",
         scores:[
             4,
@@ -32,7 +32,7 @@ var friends = [
         ]
     },
     {
-        name:"Jim Halpert",
+        friendName:"Jim Halpert",
         photo: "https://vignette.wikia.nocookie.net/theoffice/images/e/e9/Character_-_JimHalpert.PNG/revision/latest/top-crop/width/360/height/360?cb=20200414162003",
         scores:[
             3,
@@ -48,7 +48,7 @@ var friends = [
         ]
     },
     {
-        name:"Angela Martin",
+        friendName:"Angela Martin",
         photo: "https://i.pinimg.com/originals/e5/67/cc/e567cc9331491412a1e53e83c7766a1a.jpg",
         scores:[
             3,

@@ -12,8 +12,6 @@ module.exports = function (app) {
 
         console.log(newFriend);
 
-
-
         var resultArr = [];
 
         for (var i = 0; i < friends.length; i++) {

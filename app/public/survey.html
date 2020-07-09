@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <label for="inputPhoto">Link to Photo</label>
-                <input type="text" class="form-control" id="inputPhoto">
+                <input type="url" class="form-control" id="inputPhoto">
                 <small class="form-text text-muted">Required</small>
             </div>
 
@@ -53,8 +53,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" id="modalBody">
-                    
+                <div class="modal-body text-center" id="modalBody">
+
                 </div>
             </div>
         </div>
@@ -62,27 +62,33 @@
 
     <script>
         $("#submit-btn").on("click", function (event) {
-            event.preventDefault();
-            var newFriend = {
-                friendName: $("#inputName").val(),
-                photo: $("#inputPhoto").val(),
-                scores: [parseInt($('input[name="question1"]:checked').val()), parseInt($('input[name="question2"]:checked').val()), parseInt($('input[name="question3"]:checked').val()), parseInt($('input[name="question4"]:checked').val()), parseInt($('input[name="question5"]:checked').val()), parseInt($('input[name="question6"]:checked').val()), parseInt($('input[name="question7"]:checked').val()), parseInt($('input[name="question8"]:checked').val()), parseInt($('input[name="question9"]:checked').val()), parseInt($('input[name="question10"]:checked').val())]
-            };
+            event.preventDefault();   
 
-            console.log(newFriend);
+            if ($("#inputName").val() === "" || $("#inputPhoto").val() === "" || $('input[name="question1"]:checked').val()===undefined || $('input[name="question2"]:checked').val()===undefined || $('input[name="question3"]:checked').val()===undefined || $('input[name="question4"]:checked').val()===undefined || $('input[name="question5"]:checked').val()===undefined || $('input[name="question6"]:checked').val()===undefined || $('input[name="question7"]:checked').val()===undefined || $('input[name="question8"]:checked').val()===undefined || $('input[name="question9"]:checked').val()===undefined || $('input[name="question10"]:checked').val()===undefined) {
+                alert("You must enter a name and photo url");
+            } else {
+                var newFriend = {
+                    friendName: $("#inputName").val(),
+                    photo: $("#inputPhoto").val(),
+                    scores: [parseInt($('input[name="question1"]:checked').val()), parseInt($('input[name="question2"]:checked').val()), parseInt($('input[name="question3"]:checked').val()), parseInt($('input[name="question4"]:checked').val()), parseInt($('input[name="question5"]:checked').val()), parseInt($('input[name="question6"]:checked').val()), parseInt($('input[name="question7"]:checked').val()), parseInt($('input[name="question8"]:checked').val()), parseInt($('input[name="question9"]:checked').val()), parseInt($('input[name="question10"]:checked').val())]
+                };
+
+                console.log(newFriend);
 
 
-            $.post("/api/friends", newFriend)
-                .then(function (data) {
-                    console.log(data);
-                    $("#modalBody").empty();
-                    $("#modalBody").append("<h5 id='modalName'>"+data.name+"</h5>");
-                    
-                    $("#modalBody").append("<img id='modalImg' class='img-fluid' src='" + data.photo + "'>");
-                    $("#friendModal").modal("show");
+                $.post("/api/friends", newFriend)
+                    .then(function (data) {
+                        console.log(data);
+                        $("#modalBody").empty();
+                        $("#modalBody").append("<h5 id='modalName'>" + data.friendName + "</h5>");
 
-                });
+                        $("#modalBody").append("<img id='modalImg' class='img-fluid' src='" + data.photo + "'>");
+                        $("#friendModal").modal("show");
+
+                    });
+            }
         });
+
 
         var questionArr = ["The boss is the most important member of the team. (1 - Strongly Disagree, 5 - Strongly Agree)", "How much work you get done isn't nearly as important as how much fun you have. (1 - Strongly Disagree, 5 - Strongly Agree)", "Human Resources is the most important piece of the team. (1 - Strongly Disagree, 5 - Strongly Agree)", "Cats are the better than humans. (1 - Strongly Disagree, 5 - Strongly Agree)", "Pranks are out of place in the work environment. (1 - Strongly Disagree, 5 - Strongly Agree)", "Beets are the most nutritious vegetable. (1 - Strongly Disagree, 5 - Strongly Agree)", "Scranton, PA ia a wonderful town. (1 - Strongly Disagree, 5 - Strongly Agree)", "A salesperson is a modern day warrior. (1 - Strongly Disagree, 5 - Strongly Agree)", "Parties are important for office morale. (1 - Strongly Disagree, 5 - Strongly Agree)", "Assistant Regional Manager and Assistant to the Regional Manager are the same thing. (1 - Strongly Disagree, 5 - Strongly Agree)"];
 
