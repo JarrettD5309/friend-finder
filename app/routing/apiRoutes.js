@@ -30,16 +30,16 @@ module.exports = function (app) {
             if (resultArr[i] < bestMatchValue) {
                 bestMatchValue = resultArr[i];
                 bestMatchIndex = i;
-            } else if (resultArr[i]===bestMatchValue) {
+            } else if (resultArr[i] === bestMatchValue) {
                 tiedArr.push(i);
             }
 
         };
 
         // Randomly chooses a friend if there is a tie for bestMatchValue
-        if (tiedArr.length>1) {
+        if (tiedArr.length > 1) {
             bestMatchIndex = tiedArr[Math.floor(Math.random() * tiedArr.length)];
-        } 
+        }
 
         friends.push(newFriend);
 
