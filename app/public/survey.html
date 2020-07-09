@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <label for="inputPhoto">Link to Photo</label>
-                <input type="url" class="form-control" id="inputPhoto">
+                <input type="url" class="form-control" id="inputPhoto" placeholder="http://your-photo-url.com/">
                 <small class="form-text text-muted">Required</small>
             </div>
 
@@ -65,7 +65,7 @@
             event.preventDefault();   
 
             if ($("#inputName").val() === "" || $("#inputPhoto").val() === "" || $('input[name="question1"]:checked').val()===undefined || $('input[name="question2"]:checked').val()===undefined || $('input[name="question3"]:checked').val()===undefined || $('input[name="question4"]:checked').val()===undefined || $('input[name="question5"]:checked').val()===undefined || $('input[name="question6"]:checked').val()===undefined || $('input[name="question7"]:checked').val()===undefined || $('input[name="question8"]:checked').val()===undefined || $('input[name="question9"]:checked').val()===undefined || $('input[name="question10"]:checked').val()===undefined) {
-                alert("You must enter a name and photo url");
+                alert("You must answer all the questions and enter a name and photo url.");
             } else {
                 var newFriend = {
                     friendName: $("#inputName").val(),
@@ -73,17 +73,26 @@
                     scores: [parseInt($('input[name="question1"]:checked').val()), parseInt($('input[name="question2"]:checked').val()), parseInt($('input[name="question3"]:checked').val()), parseInt($('input[name="question4"]:checked').val()), parseInt($('input[name="question5"]:checked').val()), parseInt($('input[name="question6"]:checked').val()), parseInt($('input[name="question7"]:checked').val()), parseInt($('input[name="question8"]:checked').val()), parseInt($('input[name="question9"]:checked').val()), parseInt($('input[name="question10"]:checked').val())]
                 };
 
-                console.log(newFriend);
-
 
                 $.post("/api/friends", newFriend)
                     .then(function (data) {
-                        console.log(data);
                         $("#modalBody").empty();
                         $("#modalBody").append("<h5 id='modalName'>" + data.friendName + "</h5>");
 
                         $("#modalBody").append("<img id='modalImg' class='img-fluid' src='" + data.photo + "'>");
                         $("#friendModal").modal("show");
+                        $('input[name="question1"]').attr("checked", false);
+                        $('input[name="question2"]').attr("checked", false);
+                        $('input[name="question3"]').attr("checked", false);
+                        $('input[name="question4"]').attr("checked", false);
+                        $('input[name="question5"]').attr("checked", false);
+                        $('input[name="question6"]').attr("checked", false);
+                        $('input[name="question7"]').attr("checked", false);
+                        $('input[name="question8"]').attr("checked", false);
+                        $('input[name="question9"]').attr("checked", false);
+                        $('input[name="question10"]').attr("checked", false);
+                        $("#inputName").val("");
+                        $("#inputPhoto").val("")
 
                     });
             }
