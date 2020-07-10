@@ -1,5 +1,6 @@
 # Dunder Mifflin Friend Finder
 <!-- <https://github.com/JarrettD5309/inventory-store> \ -->
+<https://sheltered-plateau-99429.herokuapp.com/> \
 Version 1.0 \
 Original Deployment Date - July 10, 2020\
 By Jarrett Dougherty
@@ -18,6 +19,8 @@ Dunder Mifflin Friend Finder is a full-stack application which uses a personalit
 ## Instructions For Use
 ### Getting Started 
 Simply click the link to start the web app. Follow the directions. NOTE: The photo input must be entered as a URL. 
+
+<https://sheltered-plateau-99429.herokuapp.com/>
 
 If you are downloading this code and wish to run the application locally, please follow the instructions below.
 
