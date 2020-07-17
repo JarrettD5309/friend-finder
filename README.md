@@ -1,5 +1,4 @@
 # Dunder Mifflin Friend Finder
-<!-- <https://github.com/JarrettD5309/inventory-store> \ -->
 <https://sheltered-plateau-99429.herokuapp.com/> \
 Version 1.0 \
 Original Deployment Date - July 10, 2020\
